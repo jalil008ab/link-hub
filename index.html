@@ -1,227 +1,301 @@
 <!DOCTYPE html>
-<html lang="uz" data-theme="night" class="scroll-smooth">
+<html lang="uz" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Coldmotors - Yuk mashinalari uchun avtoxolodilnik o'rnatish va sifatli ta'mirlash markazi. +20° dan -20° gradusgacha qattiq sovutish.">
-    <meta name="keywords" content="avtoxolodilnik, fura xolodilnik o'rnatish, yuk mashinasi sovutgich, coldmotors, refrijerator ta'mirlash, Toshkent avtoxolodilnik">
-    <meta property="og:title" content="Coldmotors | Yuk Mashinalari Avtoxolodilniklari">
-    <meta property="og:description" content="O'zbekistonda 1-raqamli avtoxolodilnik o'rnatish va ta'mirlash xizmati. Yangi xolodilnikka 100% Kafolat.">
-    <meta property="og:type" content="website">
-    <title>Coldmotors | DaisyUI Pro Edition</title>
+    <title>Coldmotors | Premium Avtoxolodilnik</title>
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
     
-    <!-- Google Fonts: Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Outfit (Juda zamonaviy va estetik shrift) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- DaisyUI & Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind CSS uchun qo'shimcha font -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030712',
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            glass: 'rgba(255, 255, 255, 0.03)',
+                            border: 'rgba(255, 255, 255, 0.05)',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, filter: 'brightness(1)' },
+                            '50%': { opacity: 0.8, filter: 'brightness(1.5)' }
+                        }
                     }
                 }
             }
         }
     </script>
+    
+    <style>
+        body {
+            background-color: #030712;
+            color: #ffffff;
+        }
+        
+        /* Haqiqiy Apple uslubidagi Glassmorphism */
+        .glass-panel {
+            background: rgba(20, 25, 35, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        
+        .glass-panel:hover {
+            background: rgba(30, 38, 50, 0.5);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0, 0.5), 0 0 20px rgba(0, 242, 254, 0.1);
+        }
+
+        /* Chiroyli neon matn */
+        .neon-text {
+            background: linear-gradient(to right, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Orqa fondagi chiroqlar */
+        .glow-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden transition-colors duration-500">
+<body class="w-full h-full overflow-x-hidden antialiased selection:bg-brand-cyan selection:text-brand-dark relative">
+
+    <!-- Orqa fon effektlari (Harakatlanuvchi chiroqlar) -->
+    <div class="fixed inset-0 w-full h-full z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-brand-blue/10 rounded-full blur-[100px] animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[35rem] h-[35rem] bg-brand-cyan/10 rounded-full blur-[100px] animate-blob" style="animation-delay: 2s"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[45rem] h-[45rem] bg-indigo-500/10 rounded-full blur-[120px] animate-blob" style="animation-delay: 4s"></div>
+        
+        <!-- Yulduzli pattern effekt -->
+        <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.5;"></div>
+    </div>
 
     <!-- Navbar -->
-    <div class="navbar bg-base-100/90 backdrop-blur-lg sticky top-0 z-50 border-b border-base-300 px-4 sm:px-8">
-        <div class="flex-1">
-            <a class="btn btn-ghost text-2xl uppercase font-black tracking-tighter hover:bg-transparent">
-                <i class="fa-solid fa-snowflake text-primary text-3xl"></i>
-                Cold<span class="text-primary">motors</span>
-            </a>
-        </div>
-        <div class="flex-none gap-2">
-            <!-- Theme Controller (Mijoz o'zi dizaynni tanlaydi!) -->
-            <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-                    <i class="fa-solid fa-palette text-xl text-base-content/70"></i>
-                </div>
-                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-2xl bg-base-200 border border-base-300 rounded-box w-52 font-bold">
-                    <li class="menu-title">UI Dizaynni tanlang</li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="🌌 Night (Tungi)" value="night" checked/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="🏙 Business (Biznes)" value="business"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="💎 Luxury (Premium)" value="luxury"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="❄️ Winter (Yorug')" value="winter"/></li>
-                </ul>
-            </div>
-            
-            <a href="tel:+998998775919" class="btn btn-primary rounded-full hidden sm:flex px-6 shadow-lg shadow-primary/30">
-                <i class="fa-solid fa-phone"></i> +998 99 877 59 19
-            </a>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <div class="hero min-h-[90vh] bg-base-200 relative overflow-hidden">
-        <!-- Dekorativ orqa fon effektlari -->
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary/10 blur-3xl mix-blend-screen pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 rounded-full bg-secondary/10 blur-3xl mix-blend-screen pointer-events-none"></div>
-
-        <div class="hero-content flex-col lg:flex-row-reverse w-full max-w-7xl gap-12 lg:gap-20 py-20 relative z-10">
-            
-            <!-- Rasm qismi (DaisyUI Stats overlapping bilan) -->
-            <div class="w-full lg:w-1/2 relative group perspective">
-                <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-base-300 transform transition-transform duration-700 hover:scale-[1.02]">
-                    <img src="truck.jpg" alt="Coldmotors Fura" class="w-full h-auto object-cover aspect-video lg:aspect-auto" />
-                    <!-- Qora gradient soya rasmni ustida -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-base-300/80 to-transparent"></div>
-                </div>
-
-                <!-- Stats: Tajriba -->
-                <div class="stats shadow-2xl absolute -bottom-8 -left-4 md:-left-8 bg-base-100 border border-base-300 transform transition-all duration-500 hover:-translate-y-2">
-                    <div class="stat p-4 md:p-6">
-                        <div class="stat-figure text-warning">
-                            <i class="fa-solid fa-star text-3xl md:text-4xl"></i>
-                        </div>
-                        <div class="stat-title font-bold text-base-content/70">Tajriba</div>
-                        <div class="stat-value text-base-content text-2xl md:text-4xl">9 YIL</div>
-                    </div>
-                </div>
-
-                <!-- Stats: Mijozlar -->
-                <div class="stats shadow-2xl absolute -top-8 -right-4 md:-right-8 bg-base-100 border border-base-300 transform transition-all duration-500 hover:-translate-y-2">
-                    <div class="stat p-4 md:p-6">
-                        <div class="stat-figure text-primary">
-                            <i class="fa-solid fa-handshake text-3xl md:text-4xl"></i>
-                        </div>
-                        <div class="stat-title font-bold text-base-content/70">Mijozlar</div>
-                        <div class="stat-value text-base-content text-2xl md:text-4xl">50+</div>
-                        <div class="stat-desc font-bold text-primary mt-1">KORXONA</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Matn qismi -->
-            <div class="w-full lg:w-1/2 mt-10 lg:mt-0">
-                <div class="badge badge-primary badge-outline mb-6 gap-2 py-4 px-5 font-black uppercase tracking-widest text-xs md:text-sm shadow-sm">
-                    <i class="fa-solid fa-bolt text-warning"></i> 1-raqamli Xizmat
-                </div>
-                
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[1.1] tracking-tight text-base-content">
-                    Yuk mashinangiz uchun <span class="text-primary block mt-2 drop-shadow-sm">ishonchli xolodilnik</span> kerakmi?
-                </h1>
-                
-                <p class="py-6 text-lg sm:text-xl text-base-content/70 font-medium leading-relaxed">
-                    ❄️ <b class="text-base-content">Coldmotors</b> — yuk mashinalari uchun avtoxolodilniklarni <span class="text-primary font-bold">100% kafolat bilan o'rnatish</span> va yuqori darajada ta’mirlash markazi!
-                </p>
-                
-                <!-- Afzalliklar (DaisyUI Cards) -->
-                <div class="flex flex-col gap-4 mb-10">
-                    <div class="card bg-base-100 shadow-sm border border-base-300 hover:border-primary hover:shadow-primary/20 transition-all duration-300 cursor-default">
-                        <div class="card-body p-4 flex-row items-center gap-5">
-                            <div class="avatar placeholder">
-                                <div class="bg-primary/20 text-primary rounded-xl w-14 h-14">
-                                    <i class="fa-solid fa-certificate text-2xl"></i>
-                                </div>
-                            </div>
-                            <p class="font-bold text-lg leading-tight text-base-content">Yangi xolodilnik <span class="text-primary">o'rnatishga 100% kafolat</span> beramiz</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card bg-base-100 shadow-sm border border-base-300 hover:border-secondary hover:shadow-secondary/20 transition-all duration-300 cursor-default">
-                        <div class="card-body p-4 flex-row items-center gap-5">
-                            <div class="avatar placeholder">
-                                <div class="bg-secondary/20 text-secondary rounded-xl w-14 h-14">
-                                    <i class="fa-solid fa-gem text-2xl"></i>
-                                </div>
-                            </div>
-                            <p class="font-bold text-lg leading-tight text-base-content">Original ehtiyot qismlar va <span class="text-secondary">sifatli materiallar</span></p>
-                        </div>
-                    </div>
-                    
-                    <div class="card bg-base-100 shadow-sm border border-base-300 hover:border-accent hover:shadow-accent/20 transition-all duration-300 cursor-default">
-                        <div class="card-body p-4 flex-row items-center gap-5">
-                            <div class="avatar placeholder">
-                                <div class="bg-accent/20 text-accent rounded-xl w-14 h-14">
-                                    <i class="fa-solid fa-wrench text-2xl"></i>
-                                </div>
-                            </div>
-                            <p class="font-bold text-lg leading-tight text-base-content">Tezkor diagnostika va <span class="text-accent">o'z vaqtida ta'mirlash</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tugmalar -->
-                <div class="flex flex-wrap gap-4">
-                    <a href="tel:+998998775919" class="btn btn-primary btn-lg rounded-full shadow-xl shadow-primary/30 text-base sm:text-lg border-none hover:scale-105">
-                        <i class="fa-solid fa-phone-volume animate-bounce"></i> +998 99 877 59 19
-                    </a>
-                    <a href="https://yandex.go.link/discovery?action=card&oid=201712415100&adj_campaign=Share-from-the-app" target="_blank" class="btn btn-neutral btn-outline btn-lg rounded-full text-base sm:text-lg hover:scale-105 bg-base-100">
-                        <i class="fa-solid fa-location-dot text-error"></i> Manzilimiz
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hamkorlar (DaisyUI style) -->
-    <div class="bg-base-100 py-16 border-y border-base-300 relative z-20">
+    <nav class="fixed top-0 inset-x-0 z-50 transition-all duration-300 backdrop-blur-xl bg-brand-dark/50 border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="divider text-base-content/40 font-black uppercase tracking-[0.2em] text-xs sm:text-sm mb-12">
-                Yirik korxonalar bizga ishonadi. Siz ham safimizga qo'shiling
-            </div>
-            <div class="flex justify-center flex-wrap gap-10 md:gap-20 items-center opacity-60 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0">
-                <span class="text-3xl font-black text-error uppercase tracking-tighter drop-shadow-sm">Korzinka</span>
-                <span class="text-3xl font-black text-red-600 italic uppercase drop-shadow-sm">KFC</span>
-                <span class="text-3xl font-black text-info italic uppercase drop-shadow-sm">Red Bull</span>
-                <span class="text-3xl font-black text-warning uppercase tracking-widest drop-shadow-sm">BTS</span>
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3 group cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-cyan to-brand-blue flex items-center justify-center shadow-[0_0_15px_rgba(0,242,254,0.4)] group-hover:shadow-[0_0_25px_rgba(0,242,254,0.6)] transition-all">
+                        <i class="fa-solid fa-snowflake text-white text-xl"></i>
+                    </div>
+                    <span class="font-black text-2xl tracking-tight text-white uppercase">Cold<span class="neon-text">motors</span></span>
+                </div>
+                <div>
+                    <a href="tel:+998998775919" class="hidden sm:flex items-center px-6 py-2.5 rounded-full glass-panel text-white font-bold hover:-translate-y-1 transition-all duration-300 group border border-white/10 hover:border-brand-cyan/50">
+                        <i class="fa-solid fa-phone mr-2 text-brand-cyan group-hover:animate-pulse-glow"></i>
+                        <span class="tracking-wide">+998 99 877 59 19</span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- Bottom CTA (DaisyUI Hero) -->
-    <div class="hero py-24 bg-primary text-primary-content relative overflow-hidden">
-        <!-- Dekorativ doiralar -->
-        <div class="absolute -top-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-2xl"></div>
-        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-black/10 rounded-full blur-2xl"></div>
-        
-        <div class="hero-content text-center relative z-10">
-            <div class="max-w-3xl">
-                <h2 class="text-3xl sm:text-5xl font-black uppercase mb-6 leading-tight drop-shadow-lg">
-                    Mashinangiz sovutmay qoldimi? <br>
-                    <span class="text-primary-content/80">Vaqtni yo'qotmang!</span>
-                </h2>
-                <p class="mb-10 text-lg sm:text-xl font-semibold text-primary-content/90">
-                    Hoziroq qo'ng'iroq qiling va mutaxassislarimizdan bepul diagnostika va maslahat oling.
-                </p>
-                <a href="tel:+998998775919" class="btn bg-base-100 text-base-content hover:bg-base-200 border-none btn-lg rounded-full text-lg sm:text-xl shadow-[0_10px_40px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-phone-volume text-primary"></i> Qo'ng'iroq qilish
-                </a>
+    <!-- Asosiy Qism (Hero) -->
+    <main class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 min-h-[90vh] flex items-center w-full max-w-[100vw] overflow-x-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Matn Qismi -->
+                <div class="lg:col-span-6 flex flex-col items-start text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-8 border border-brand-cyan/20">
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-cyan"></span>
+                        </span>
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-widest text-brand-cyan">Premium Xizmat</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[1.1] tracking-tight mb-6">
+                        Yuk mashinangizga <br>
+                        <span class="neon-text block mt-2 pb-2">ishonchli xolodilnik</span> kerakmi?
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-gray-400 font-light leading-relaxed mb-10 max-w-xl">
+                        ❄️ <b class="text-white font-medium">Coldmotors</b> — yuk mashinalari uchun avtoxolodilniklarni <span class="text-brand-cyan font-medium">100% kafolat bilan o'rnatish</span> va yuqori sifatda ta’mirlash markazi!
+                    </p>
+
+                    <!-- Estetik Afzalliklar (List) -->
+                    <div class="w-full flex flex-col gap-4 mb-12 max-w-xl">
+                        <!-- Item 1 -->
+                        <div class="glass-panel rounded-2xl p-4 flex items-center gap-5 transition-all duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-cyan/20 to-brand-blue/20 border border-brand-cyan/30 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-certificate text-brand-cyan text-xl"></i>
+                            </div>
+                            <p class="text-gray-300 font-medium text-[15px] sm:text-base leading-snug">
+                                Yangi xolodilnik <b class="text-white">o'rnatishga 100% kafolat</b> beramiz
+                            </p>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div class="glass-panel rounded-2xl p-4 flex items-center gap-5 transition-all duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-gem text-purple-400 text-xl"></i>
+                            </div>
+                            <p class="text-gray-300 font-medium text-[15px] sm:text-base leading-snug">
+                                Faqat original qismlar va <b class="text-white">sifatli materiallar</b>
+                            </p>
+                        </div>
+                        
+                        <!-- Item 3 -->
+                        <div class="glass-panel rounded-2xl p-4 flex items-center gap-5 transition-all duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-wrench text-green-400 text-xl"></i>
+                            </div>
+                            <p class="text-gray-300 font-medium text-[15px] sm:text-base leading-snug">
+                                Tezkor diagnostika va <b class="text-white">o'z vaqtida ta'mirlash</b>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Tugmalar -->
+                    <div class="flex flex-col sm:flex-row w-full gap-4 max-w-xl">
+                        <a href="tel:+998998775919" class="group relative flex-1 flex items-center justify-center px-8 py-4 rounded-full font-bold text-brand-dark bg-gradient-to-r from-brand-cyan to-brand-blue hover:scale-105 transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(0,242,254,0.3)] hover:shadow-[0_0_40px_rgba(0,242,254,0.6)]">
+                            <i class="fa-solid fa-phone-volume mr-3 animate-pulse"></i> +998 99 877 59 19
+                        </a>
+                        <a href="https://yandex.go.link/discovery?action=card&oid=201712415100&adj_campaign=Share-from-the-app" target="_blank" class="group flex-1 flex items-center justify-center px-8 py-4 rounded-full font-bold text-white glass-panel hover:bg-white hover:text-brand-dark transition-all duration-300 uppercase tracking-widest text-sm border border-white/10">
+                            <i class="fa-solid fa-location-dot mr-3 text-red-500 group-hover:text-red-600"></i> Manzilimiz
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rasm Qismi (Glow effekt bilan va scrolling xatosini to'g'irlangan holati) -->
+                <div class="lg:col-span-6 mt-16 lg:mt-0 relative flex justify-center w-full">
+                    <div class="relative w-full max-w-[500px] animate-float">
+                        <!-- Rasm orqasidagi porlash -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-cyan to-brand-blue rounded-[2rem] blur-[30px] opacity-20"></div>
+                        
+                        <div class="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl p-2 glass-panel">
+                            <img src="truck.jpg" alt="Coldmotors Fura" class="w-full h-auto object-cover rounded-[1.5rem] brightness-90 hover:brightness-100 transition-all duration-500" />
+                        </div>
+                        
+                        <!-- Floating Stats - Tajriba (Ekranga moslashtirilgan) -->
+                        <div class="absolute top-6 -left-2 sm:-left-8 glass-panel rounded-2xl p-4 pr-6 flex items-center gap-4 z-20 shadow-2xl border border-white/10" style="animation: float 5s ease-in-out infinite reverse;">
+                            <div class="w-12 h-12 rounded-full bg-yellow-400/10 flex items-center justify-center border border-yellow-400/30">
+                                <i class="fa-solid fa-star text-yellow-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest">Tajriba</p>
+                                <p class="text-lg sm:text-xl font-black text-white">9 YIL</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Stats - Mijozlar (Ekranga moslashtirilgan) -->
+                        <div class="absolute bottom-6 -right-2 sm:-right-8 glass-panel rounded-2xl p-4 pr-6 flex items-center gap-4 z-20 shadow-2xl border border-white/10" style="animation: float 7s ease-in-out infinite;">
+                            <div class="w-12 h-12 rounded-full bg-brand-cyan/10 flex items-center justify-center border border-brand-cyan/30">
+                                <i class="fa-solid fa-handshake text-brand-cyan text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest">Mijozlar</p>
+                                <p class="text-lg sm:text-xl font-black text-white">50+ KORXONA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Brendlar (Ijtimoiy Isbot) -->
+    <section class="py-16 relative border-y border-white/5 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-center text-xs font-bold uppercase tracking-[0.3em] text-gray-500 mb-10">
+                O'zbekistonning eng yirik korxonalari tanlovi
+            </p>
+            <div class="flex justify-center items-center flex-wrap gap-10 sm:gap-16 lg:gap-24 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+                <span class="text-2xl sm:text-3xl font-black text-red-500 uppercase tracking-tighter hover:scale-110 transition-transform cursor-default">Korzinka</span>
+                <span class="text-2xl sm:text-3xl font-black text-red-600 italic uppercase hover:scale-110 transition-transform cursor-default">KFC</span>
+                <span class="text-2xl sm:text-3xl font-black text-blue-500 italic uppercase hover:scale-110 transition-transform cursor-default">Red Bull</span>
+                <span class="text-2xl sm:text-3xl font-black text-yellow-500 uppercase tracking-widest hover:scale-110 transition-transform cursor-default">BTS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-24 relative overflow-hidden flex justify-center w-full">
+        <!-- Chiroq nuri effekti -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-brand-cyan/10 blur-[100px] rounded-full pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 w-full">
+            <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight mb-6 leading-tight">
+                Mashinangiz sovutmay qoldimi? <br>
+                <span class="neon-text">Vaqtni yo'qotmang!</span>
+            </h2>
+            <p class="text-gray-400 text-lg sm:text-xl mb-12 font-light max-w-2xl mx-auto">
+                Hoziroq qo'ng'iroq qiling. Mutaxassislarimiz tashxis qo'yib, muammoni joyida hal qilib berishadi.
+            </p>
+            
+            <a href="tel:+998998775919" class="inline-flex items-center justify-center px-10 py-5 rounded-full font-black text-white bg-white/5 border border-brand-cyan/30 backdrop-blur-md hover:bg-brand-cyan hover:text-brand-dark transition-all duration-500 uppercase tracking-widest text-lg shadow-[0_0_40px_rgba(0,242,254,0.1)] hover:shadow-[0_0_60px_rgba(0,242,254,0.5)] hover:scale-105 group">
+                <i class="fa-solid fa-phone-volume mr-4 text-brand-cyan group-hover:text-brand-dark group-hover:animate-bounce"></i> Qo'ng'iroq qilish
+            </a>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer items-center p-8 bg-base-300 text-base-content">
-        <div class="max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-6">
-            <aside class="items-center grid-flow-col gap-3">
-                <i class="fa-solid fa-snowflake text-4xl text-primary drop-shadow-md"></i>
-                <div>
-                    <p class="font-black text-2xl uppercase tracking-tighter">Cold<span class="text-primary">motors</span></p>
-                    <p class="text-sm font-medium text-base-content/60">&copy; 2026 Barcha huquqlar himoyalangan.</p>
-                </div>
-            </aside> 
-            <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-                <a href="tel:+998998775919" class="btn btn-circle btn-ghost bg-base-200 text-xl hover:bg-primary hover:text-primary-content shadow-sm transition-colors"><i class="fa-solid fa-phone"></i></a>
-                <a href="#" class="btn btn-circle btn-ghost bg-base-200 text-xl hover:bg-info hover:text-info-content shadow-sm transition-colors"><i class="fa-brands fa-telegram"></i></a>
-                <a href="#" class="btn btn-circle btn-ghost bg-base-200 text-xl hover:bg-secondary hover:text-secondary-content shadow-sm transition-colors"><i class="fa-brands fa-instagram"></i></a>
-            </nav>
+    <footer class="py-10 border-t border-white/10 bg-black/50 backdrop-blur-lg">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity">
+                <i class="fa-solid fa-snowflake text-brand-cyan text-2xl"></i>
+                <span class="font-black text-xl text-white uppercase tracking-tight">Cold<span class="text-brand-cyan">motors</span></span>
+            </div>
+            
+            <p class="text-gray-500 text-sm font-medium text-center">
+                &copy; 2026 Barcha huquqlar himoyalangan.
+            </p>
+            
+            <div class="flex gap-4">
+                <a href="tel:+998998775919" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-gray-400 hover:text-brand-cyan hover:border-brand-cyan/50 transition-colors">
+                    <i class="fa-solid fa-phone"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-400/50 transition-colors">
+                    <i class="fa-brands fa-telegram"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-gray-400 hover:text-pink-500 hover:border-pink-500/50 transition-colors">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
         </div>
     </footer>
 
